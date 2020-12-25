@@ -33,8 +33,7 @@ async function run() {
     const commitsFilename = `${draftName}-commits.json`;
     await fs.writeFile(
       commitsFilename,
-      JSON.stringify(parsedCommits, (key, value) => value),
-      2
+      JSON.stringify(parsedCommits, (key, value) => value, 2)
     );
     core.setOutput("commits-json", commitsFilename);
     const template = await loadTemplate(core.getInput("template"));
