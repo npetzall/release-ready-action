@@ -30,8 +30,8 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
          upload_url: ${{ steps.drafting.outputs.upload-url }}
-         asset_path: ./${{ steps.drafting.output.commits-json }}
-         asset_name: ${{ steps.drafting.output.commits-json }}
+         asset_path: ./${{ steps.drafting.outputs.commits-json }}
+         asset_name: ${{ steps.drafting.outputs.commits-json }}
          asset_content_type: application/json
       - name: Upload Release Asset Release-Ready
         id: upload-release-asset
