@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "release-ready-action",
+  "version": "0.0.1",
+  "description": "Create or update draft so that you are release ready",
+  "source": "index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prepare": "ncc build index.js -m -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run lint && npm run prepare && npm run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^4.0.0",
+    "dot": "git+https://github.com/olado/doT.git#d00300e29ab47835322bf948f6e19a478eef8dc1"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "@vercel/ncc": "^0.25.1",
+    "eslint": "^7.4.0",
+    "jest": "^26.1.0"
+  }
+}

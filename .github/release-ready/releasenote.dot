@@ -1,0 +1,7 @@
+Changes in {{=nextVersion}} {{? currentVersion }}since {{=currentVersion}} {{?}}
+
+Features:{{ for(var feat of changes.filter(function(change) { return change.type === 'feat' })) { }}
+* {{? feat.scope }}{{=feat.scope}}: {{?}}{{=feat.message}}{{ } }}
+
+Fixes:{{ for (var fix of changes.filter(function(change) { return change.type === 'fix'})) { }}
+* {{? fix.scope }}{{=fix.scope}}: {{?}}{{=fix.message}}{{ } }}

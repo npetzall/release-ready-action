@@ -1,0 +1,41 @@
+name: 'Release Ready'
+description: 'Create or update draft so that you are release ready'
+inputs:
+  token:
+    description: 'Token used for access, defaults github.token'
+    required: false
+    default: ${{ github.token }}
+  draft-tag:
+    description: 'Tag that should be used when publishing'
+    required: true
+    default: 'v0.0.0'
+  draft-name:
+    description: 'Name of the release'
+    required: false
+  header-pattern:
+    description: 'Pattern to extract header field'
+    required: false
+    default:  "^(\\w*)(?:\\(([\\w$.\\-*/ ]*)\\))?: (.*)$"
+  header-fields:
+    description: 'List of headers that are matched by groups in headerPattern'
+    required: false
+    default: '["type", "scope", "message"]'
+  template:
+    description: 'User your own template'
+    required: false
+  update-draft:
+    description: 'Should we update a draft or create if it doesnt exist'
+    required: false
+    default: "true"
+outputs:
+  release-notes:
+    description: 'Generated release notes'
+  draft-id:
+    description: 'Release id of the created/updated draft'
+  upload-url:
+    description: 'Upload url used for assets'
+  commits-json:
+    description: 'Filename of json-ile with all commits from last tag'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

@@ -1,0 +1,46 @@
+name: "Dogfooding Release Ready"
+
+on: [push]
+
+jobs:
+  release_read_job:
+    runs-on: ubuntu-latest
+    name: Ready for a release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Package release-ready-action dist
+        run: zip Release-Ready-Action-dist-0.0.${{ github.run_number }}.zip -r dist action.xml
+      - name: Create/Update draft
+        uses: ./
+        id: drafting
+        with:
+          draft-tag: "v0.0.${{ github.run_number }}"
+          template: "./.github/release-ready/releasenote.dot"
+          update-draft: ${{ github.ref == 'refs/heads/main' }}
+      - name: Print release notes
+        run: echo "${{ steps.drafting.outputs.release-notes }}"
+      - name: Upload commits since latest tag
+        id: upload-commits-json
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: actions/upload-release-asset@v1
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+         upload_url: ${{ steps.drafting.outputs.upload-url }}
+         asset_path: ./${{ steps.drafting.output.commits-json }}
+         asset_name: ${{ steps.drafting.output.commits-json }}
+         asset_content_type: application/json
+      - name: Upload Release Asset Release-Ready
+        id: upload-release-asset
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.drafting.outputs.upload-url }}
+          asset_path: ./Release-Ready-Action-dist-0.0.${{ github.run_number }}.zip
+          asset_name: Release-Ready-Action-dist-0.0.${{ github.run_number }}.zip
+          asset_content_type: application/zip
