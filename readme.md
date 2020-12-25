@@ -23,7 +23,7 @@ This dependency is using commit-ish instead of tag
 * Expose good stuff for later steps
 
 
-## Inputs [action.xml](action.xml)
+## Inputs [action.yml](action.yml)
 
 ### `token`
 

@@ -12,7 +12,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Package release-ready-action dist
-        run: zip Release-Ready-Action-dist-0.0.${{ github.run_number }}.zip -r dist action.xml
+        run: zip Release-Ready-Action-dist-0.0.${{ github.run_number }}.zip -r dist action.yml
       - name: Create/Update draft
         uses: ./
         id: drafting
