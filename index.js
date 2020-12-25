@@ -20,7 +20,7 @@ async function run() {
     } else {
       console.log(`This repo has no tags, fetching all history`);
     }
-    const rawCommits = getCommitsSinceTag(tag);
+    const rawCommits = await getCommitsSinceTag(tag);
     const toHeaderObject = parserFunc(
       core.getInput("header-pattern"),
       JSON.parse(core.getInput("header-fields"))
