@@ -37,5 +37,5 @@ outputs:
   commits-json:
     description: 'Filename of json-ile with all commits from last tag'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
